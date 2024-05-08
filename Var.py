@@ -32,6 +32,8 @@ TLANSLATION_DATA: dict[discord.Locale, dict[str, str]] = {
         'Connection to database failed.': 'データベースへの接続に失敗しました。',
         'Failed to register in database.': 'データベースへの登録に失敗しました。',
         'Database creation failed.': 'データベースの作成に失敗しました。',
+        
+        'Edit message': 'メッセージ編集',
     },
 }
 

@@ -3,6 +3,7 @@ import discord
 from datetime import datetime
 import datetime
 import sugar_db
+from discord import app_commands
 
 class MessageEditEventCog(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -48,7 +49,7 @@ class MessageEditEventCog(commands.Cog):
         else:
             date_before = before_message.created_at
         date_before = date_before + datetime.timedelta(hours=9)
-        date_before_str: str = date_before.strftime('%Y年%m月%d日 %p%I時%M分%S秒')
+        date_before_str: str = date_before.strftime('%Y/%m/%d %p%I:%M:%S')
         embed_before.set_footer(text=date_before_str)
         
         name: str = before_message.author.display_name
@@ -66,7 +67,7 @@ class MessageEditEventCog(commands.Cog):
         
         date_after: datetime.datetime = after_message.edited_at + datetime.timedelta(hours=9)
         
-        date_after_str: str = date_after.strftime('%Y年%m月%d日 %p%I時%M分%S秒')
+        date_after_str: str = date_after.strftime('%Y/%m/%d %p%I:%M:%S')
         embed_after.set_footer(text=date_after_str)
         
         embed_after.set_author(name=name, icon_url=url)
@@ -79,7 +80,12 @@ class MessageEditEventCog(commands.Cog):
             channel = guild.get_channel(channel_id)
             if channel == None:
                 continue
-            await channel.send(content=":pencil2: **" + date_after_str + " メッセージ編集**", embeds=embed_list)
+            try:
+                msg = await self.bot.tree.translator.translate('Edit message', discord.Locale.japanese, None)
+                print(msg)
+            except Exception as e:
+                print(e)
+            await channel.send(content=f":pencil2: **" + date_after_str + " メッセージ編集**", embeds=embed_list)
 
 
 async def setup(bot: commands.Bot):
