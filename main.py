@@ -21,7 +21,7 @@ CMD_COGS = [
 ]
 
 EVENT_COGS = [
-    'events.ban_event',
+    'events.message_edit_event',
 ]
 
 class MyTranslator(app_commands.Translator):
@@ -41,11 +41,11 @@ class MyBot(commands.Bot):
                 await self.load_extension(cog)
             except Exception:
                 traceback.print_exc()
-        # for cog in EVENT_COGS:
-        #     try:
-        #         await self.load_extension(cog)
-        #     except Exception:
-        #         traceback.print_exc()
+        for cog in EVENT_COGS:
+            try:
+                await self.load_extension(cog)
+            except Exception:
+                traceback.print_exc()
 
     async def on_ready(self):
         print('-----')

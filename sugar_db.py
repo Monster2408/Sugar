@@ -22,7 +22,8 @@ async def add_channel(channel: discord.abc.GuildChannel) -> int:
     try:
         # テーブル作成
         create_table_sql: str = """create table if not exists channel_ids (
-                id bigint(20) not null auto_increment primary key
+                id bigint(20) not null auto_increment primary key,
+                guild_id bigint(20) not null
             );"""
         cur.execute(create_table_sql)
         conn.commit()
@@ -37,7 +38,7 @@ async def add_channel(channel: discord.abc.GuildChannel) -> int:
         return -2
     
     # チャネルIDを挿入
-    insert_sql = f"insert ignore into channel_ids (id) values ({str(channel.id)});"
+    insert_sql = f"insert ignore into channel_ids (id, guild_id) values ({str(channel.id)}, {str(channel.guild.id)});"
     try:
         cur.execute(insert_sql)
         conn.commit()
@@ -50,8 +51,36 @@ async def add_channel(channel: discord.abc.GuildChannel) -> int:
     
     return 1
 
-
-
-RESPONSE_DICT: dict[str, str] = {
-    "failed_to_connect_db": "データベースに接続できませんでした。",
-}
+async def get_log_channels(guild_id: int) -> list[int]:
+    # DBへ接続
+    conn = mysql.connector.connect(
+        user=Var.MYSQL_USER,
+        password=Var.MYSQL_PASSWORD,
+        host=Var.MYSQL_HOST,
+        port=Var.MYSQL_PORT,
+        database=Var.MYSQL_DB
+    )
+    
+    # DBの接続確認
+    if not conn.is_connected():
+        return []
+    
+    try:
+        cur = conn.cursor()
+        
+        # チャネルIDを取得
+        select_sql = f"select id from channel_ids where guild_id = {str(guild_id)};"
+        cur.execute(select_sql)
+        result = []
+        for result_line in cur.fetchall():
+            result.append(result_line[0])
+        
+        print(result)
+        
+        cur.close()
+        conn.close()
+    except Exception as e:
+        print(e)
+        return []
+    
+    return result
