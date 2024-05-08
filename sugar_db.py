@@ -20,27 +20,24 @@ async def add_channel(channel: discord.abc.GuildChannel) -> int:
     
     cur = conn.cursor()
     try:
-        # チャネルIDが既に登録されているか確認
-        check_sql = f"select id from channel_ids where id = {str(channel.id)};"
-        cur.execute(check_sql)
-        result = cur.fetchone()
-        if result:
-            return -2
-        
         # テーブル作成
         create_table_sql: str = """create table if not exists channel_ids (
                 id bigint(20) not null auto_increment primary key
             );"""
         cur.execute(create_table_sql)
         conn.commit()
-        cur.close()
     except Exception as e:
         print(e)
         return -3
+    # チャネルIDが既に登録されているか確認
+    check_sql = f"select id from channel_ids where id = {str(channel.id)};"
+    cur.execute(check_sql)
+    result = cur.fetchone()
+    if result:
+        return -2
     
     # チャネルIDを挿入
     insert_sql = f"insert ignore into channel_ids (id) values ({str(channel.id)});"
-    cur = conn.cursor()
     try:
         cur.execute(insert_sql)
         conn.commit()
