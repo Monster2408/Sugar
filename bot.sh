@@ -36,7 +36,7 @@ start() {
     echo "Starting $SERVICE..."
     tmux new-session -d -s $SESSION_NAME
     tmux send-keys -t $SESSION_NAME:0 "cd $MC_PATH" C-m
-    tmux send-keys -t $SESSION_NAME:0 "python3 MLS.py" C-m
+    tmux send-keys -t $SESSION_NAME:0 "python3 $SERVICE" C-m
   fi
   exit
 }

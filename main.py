@@ -59,7 +59,7 @@ class MyBot(commands.Bot):
         print(f'{Var.BOT_MODULE}のバージョンはv{discord.__version__}')
         print('-----')
         await self.wait_until_ready()
-        await self.change_presence(status=discord.Status.online, activity=discord.Game("---=== 起動中 ===---"))
+        await self.change_presence(status=discord.Status.online, activity=discord.Game(f"v{Var.BOT_VERSION}"))
         await self.tree.set_translator(MyTranslator())
         await self.tree.sync(guild=None)
 
