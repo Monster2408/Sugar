@@ -23,8 +23,6 @@ class MessageEditEventCog(commands.Cog):
         channel_list: list[int] = await sugar_db.get_log_channels(payload.guild_id)
         if len(channel_list) == 0:
             return
-        
-        print('メッセージ編集')
                 
         if 'embeds' in payload.data:
             if len(payload.data['embeds']) != 0:

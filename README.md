@@ -13,3 +13,56 @@
 ```
 
 # TODO 
+- [x] banner
+- [ ] default_notifications
+- [ ] default_role
+- [x] description
+- [ ] discovery_splash
+- [ ] dms_paused_until
+- [ ] emoji_limit
+- [ ] emojis
+- [ ] explicit_content_filter
+- [ ] features
+- [ ] filesize_limit
+- [ ] forums
+- [x] icon
+- [ ] invites_paused_until
+- [ ] large
+- [ ] me
+- [ ] member_count
+- [ ] members
+- [ ] mfa_level
+- [x] name
+- [ ] nsfw_level
+- [ ] owner
+- [ ] owner_id
+- [ ] preferred_locale
+- [ ] premium_progress_bar_enabled
+- [ ] premium_subscriber_role
+- [ ] premium_subscribers
+- [ ] premium_subscription_count
+- [ ] premium_tier
+- [ ] public_updates_channel
+- [ ] roles
+- [ ] rules_channel
+- [ ] safety_alerts_channel
+- [ ] scheduled_events
+- [ ] self_role
+- [ ] shard_id
+- [ ] splash
+- [ ] stage_channels
+- [ ] stage_instances
+- [ ] sticker_limit
+- [ ] stickers
+- [ ] system_channel
+- [ ] system_channel_flags
+- [ ] text_channels
+- [ ] threads
+- [ ] unavailable
+- [ ] vanity_url
+- [ ] vanity_url_code
+- [ ] verification_level
+- [ ] voice_channels
+- [ ] voice_client
+- [ ] widget_channel
+- [ ] widget_enabled
