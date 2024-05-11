@@ -1,5 +1,6 @@
 from discord.ext import commands
 import discord
+import datetime
 
 import sugar_db
 
@@ -50,6 +51,18 @@ class GuildUpdateEventCog(commands.Cog):
         if before.default_notifications != after.default_notifications:
             before_embed.add_field(name='デフォルト通知設定', value=str(before.default_notifications))
             after_embed.add_field(name='デフォルト通知設定', value=str(after.default_notifications))
+        
+        embeds = [before_embed, after_embed]
+        channel: discord.abc.GuildChannel
+        date_after: datetime.datetime = datetime.datetime.now() + datetime.timedelta(hours=9)
+        
+        date_after_str: str = date_after.strftime('%Y/%m/%d %p%I:%M:%S')
+        
+        for channel_id in channel_list:
+            channel = before.get_channel(channel_id)
+            if channel == None:
+                continue
+            await channel.send(content=f":pencil2: **" + date_after_str + " メッセージ編集**", embeds=embeds)
         
 
 async def setup(bot: commands.Bot):
