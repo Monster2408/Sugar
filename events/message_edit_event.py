@@ -78,11 +78,7 @@ class MessageEditEventCog(commands.Cog):
             channel = guild.get_channel(channel_id)
             if channel == None:
                 continue
-            try:
-                msg = await self.bot.tree.translator.translate('Edit message', discord.Locale.japanese, None)
-                print(msg)
-            except Exception as e:
-                print(e)
+
             await channel.send(content=f":pencil2: **" + date_after_str + " メッセージ編集**", embeds=embed_list)
 
 

@@ -22,6 +22,7 @@ CMD_COGS = [
 
 EVENT_COGS = [
     'events.message_edit_event',
+    'events.guild_update_event',
 ]
 
 class MyTranslator(app_commands.Translator):
