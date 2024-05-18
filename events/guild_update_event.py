@@ -54,7 +54,6 @@ class GuildUpdateEventCog(commands.Cog):
             embed_after.add_field(name='デフォルト通知設定', value=str(after.default_notifications))
         
         now: str = datetime.now(pytz.timezone('Asia/Tokyo')).strftime('%Y年%m月%d日 %p%I時%M分%S秒')
-        
         embed_after.set_footer(text=now)
         
         embed_list: list = [embed_before, embed_after]
@@ -64,7 +63,6 @@ class GuildUpdateEventCog(commands.Cog):
             channel = before.get_channel(channel_id)
             if channel == None:
                 continue
-
             await channel.send(content=f":pencil2: **" + now + " ギルド編集**", embeds=embed_list)
 
 
