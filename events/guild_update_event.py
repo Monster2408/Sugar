@@ -58,13 +58,7 @@ class GuildUpdateEventCog(commands.Cog):
         
         embed_list: list = [embed_before, embed_after]
         
-        channel: discord.abc.GuildChannel
-        for channel_id in channel_list:
-            channel = before.get_channel(channel_id)
-            if channel == None:
-                continue
-            await channel.send(content=f":pencil2: **" + now + " ギルド編集**", embeds=embed_list)
-
+        await sugar_db.send_log_channel(content=f":pencil2: **" + now + " ギルド編集**", embeds=embed_list, channel_list=channel_list, guild=before)
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(GuildUpdateEventCog(bot))

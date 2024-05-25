@@ -84,3 +84,16 @@ async def get_log_channels(guild_id: int) -> list[int]:
         return []
     
     return result
+
+async def send_log_channel(content: str, channel_list: list[int], guild: discord.Guild, embed: discord.Embed = None, embeds: list[discord.Embed] = None) -> int:
+    channel: discord.abc.GuildChannel
+    if embeds == None and embed != None:
+        embeds = [embed]
+    if embeds == None and embed == None:
+        return -1
+    for channel_id in channel_list:
+        channel = guild.get_channel(channel_id)
+        if channel == None:
+            continue
+        await channel.send(content=content, embeds=embeds)
+    return 1

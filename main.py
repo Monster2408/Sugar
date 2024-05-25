@@ -21,8 +21,12 @@ CMD_COGS = [
 ]
 
 EVENT_COGS = [
-    'events.message_edit_event',
+    'events.emoji_update_event',
+    'events.channel_create_event',
+    'events.channel_delete_event',
     'events.guild_update_event',
+    'events.message_delete_event',
+    'events.message_edit_event',
 ]
 
 class MyTranslator(app_commands.Translator):
